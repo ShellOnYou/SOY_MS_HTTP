@@ -9,6 +9,16 @@ Note that the database proposed here contains just one exercise. Instructors can
 
 The app is intended to run as a set of docker containers orchestrated by *docker Swarm*, so you need docker installed (v25 and v26 have been tested but older version should also work). Alternatively, you could easily migrate to kubernetes or even manually start its component one by one with appropriate changes in the code (port numbers, variables).
 
+## Content
+
+This directory contains the code of the microservice version. It includes the following components:
+
+- `exercise-http`: Code for the *exercise* microservice.
+
+- `other-http`: Code for the *other* (aka *leftover*) microservice.
+
+- `gateway`: Code for the *gateway* service.
+
 
 ## Building or getting the app
 
@@ -19,84 +29,59 @@ Once you have cloned the content of this repo, to get the app you either need to
 - `cd` to the root of this repo, i.e. that containing (`variables.env`).
 - run the `./build.sh` command (this builds the docker images one after the other).
 
-Note that the database image build in this way is programmed to use the database content stored in the the `v5-soy-db` folder. An advantage is that changes in the DB are persisted from one run to the other. A drawback is that this could cause you problems in case the permissions are not set correctly on this folder (it should be something like `7xx`, eg 700 is working fine on our machines).
-
 ### Getting the app from DockerHub:
 
 Alternatively, you can get the app by getting the docker images from Docker Hub:
 - `cd` to the root folder of the repo (containing the `variables.env` file).
 - run the `pull_from_dockerHub.sh` script  
-- you need to change the `docker-compose.yml` to accomodate that in the DockerHub version, the DB is stored inside the container: comment these lines (add a `#` sign in front): 
-    - volumes:
-    - ./v5-soy-db:/var/lib/postgresql/data
 
-## Launching the application
+In case of problem also refer to the following link [Docker Hub images](https://hub.docker.com/repository/docker/icws24submission/postgres_icws24/general)
+
+
+## Setting up the app
+
+- Uncompress the content of the DB by typing: `tar xzf v5-soy-dv.tgz`. This should create a `v5-soy-db` folder. Check by `ls -l` that the permissions are `7xx` on this folder (i.e. the user has all permissions).
+
+- Modify the `variables.env` file according to your environment requirements.
 
 - Complete the information in the `EMAIL` section of this file. This is needed for the account creation and change password functionalities. If you don't need them (eg if you're just interested in running load tests), ignore this section.
 
-- You could (un)comment the `DEBUG=*` line in this file to have more/less info as the app launches and runs
+- Uncomment/comment the `DEBUG=*` line in this file to have less/more info as the app launches and runs.
 
-- `cd` to the root folder of this repo
 
-- run this command: `docker compose up` to launch the app (note: with older versionsof *docker*, e.g. v20, you could need to add a dash: `docker-compose up`)
+## Launching the application
+
+- While still being in the root folder of this repo, run this command: 
+
+    ```bash
+    docker-compose up
+    ```
+
+Note: with older versions of *docker*, e.g. v20, you could need to add a dash: `docker-compose up`
+
+## Accessing the app
+
+Once it is launched, you can access the app using the appropriate endpoints and ports specified in your customized `docker-compose.yml` and `variables.env` files. If you didn't change any port version, the front is accessed at `http://localhost:3001` and the backend at `http://localhost:5001`.
+The endpoints are listed in the `exercise-http/routes` and the `other-http/routes` folders.
 
 
 ## Replicating some services
 
-The app comes in a configuration where each service is launched just once, but you can alter the replicas number of a service by uncommenting the `replicas` line in the corresponding service in the `docker-compose.yml` file and launching the app with this command:
+The app comes in a configuration where each service is launched just once, but you can alter the replicas number of a service by updating the `replicas` lines of the corresponding service in the `docker-compose.yml` file and launching the app with this command:
 `docker compose --compatibility up`
 
-The only exception concerns the *gateway* service that needs to be put behind a reverse proxy in order to be replicated (the entrance port can only be mapped. In [1] we resorted to [HAproxy](https://www.haproxy.org/) to do that. It's installation is beyond the scope of this README file but you can contact us in case of difficulties. 
+Note: when you do changes in the `docker-compose.yml` file you should stop the app before re-launching it:
+    ```bash
+    docker-compose down
+    ```
 
-*/
-
-## Notes on the content of this repo:
-
-The repo is organized in several directories, presenting the content of the app tested in the microservice versions. 
-
-The files presented here allow readers of the paper to access implementation details of the app. In case someone aims at actually launching the app, we provide anonymzed container images on Docker Hub. These are available at  https://hub.docker.com/u/icws24submission the instructions for running the app being indicated in the description of the two postgres containers (one for the monolith + one for the microservice version).
-
-Information about the load tests is also included in the present repo.
-
-Bellow we detail the content of each directory provided in this repo.
-
-### MicroServiceVersion
-
-This directory contains the code of the microservice version. It includes the following components:
-
-- `docker-init`: This directory contains Docker configuration files for building and deploying this version.
-
-- `exercise-http`: Code for the *exercise* microservice.
-
-- `other-http`: Code for the *other* (aka *leftover*) microservice.
-
-- `gateway`: Code for the *gateway* sercvice.
+Note: the *gateway* service cannot be replicated in the same way. You need to be put behind a reverse proxy in order to replicate it (the entrance port can only be mapped to one process). In [1] we resorted to an [HAproxy](https://www.haproxy.org/) service to do that. It's installation is beyond the scope of this README file but you can contact us in case of difficulties. 
 
 ##### Docker Configuration (`docker-init/docker-compose.yml`)
 
-   The `docker-compose.yml` file in the `docker-init` directory orchestrates the deployment of the microservices.
+   The `docker-compose.yml` file orchestrates the deployment of the microservices.
 
    Note that the presented configuration allows to replicate the *exercise* and *other* microservices, but to replicate the *gateway*, an additionnal *haproxy* service would be needed to ensure a single entry point in the backend and load balancing queries between the replicas of the gateway.
-
-##### Usage
-
-To deploy the microservice version using Docker, follow these steps:
-
-1. Navigate to the `docker-init` directory.
-
-2. Ensure you have Docker installed on your system.
-
-3. Modify the `variables.env` file according to your environment requirements.
-
-4. Run the following command to deploy the microservices:
-
-    ```bash
-    docker-compose up -d
-    ```
-
-    This command will fetch the containers from the Docker Hub, then start them as defined in the `docker-compose.yml` file.
-
-5. Access the app using the appropriate endpoint and port specified in your customized `docker-compose.yml` file.
 
 #### Notes
 
@@ -129,26 +114,6 @@ Inside the `Load_Tests_Ms_Version` directory, you'll find the following structur
   - `user-files`: files necessary for Gatling to generate and send requests to the app. The proposed scenario follows that described in the paper.
 
 Load testing *the monolith version* requires you to simplify our .sh scripts located in the `bin` directory.
-
-### Load_Tests_Results
-
-This directory contains a result file aggregating load tests for variious versions of both the microservice and monolith version. 
-
-### Downloading Files
-
-To download all the files above, you can use the `archive.zip` file. This will allow you to download all the declared folders.
-
-### Docker Images
-
-For your convenience, the deployment instructions for these versions are also provided within their respective Docker images on DockerHub. Please refer to the following links:
-
-- Microservice Version: [Docker Hub Link](https://hub.docker.com/repository/docker/icws24submission/postgres_icws24/general)
-
-- Monolith Version: [Docker Hub Link](https://hub.docker.com/repository/docker/icws24submission/postgres_monolith/general)
-
-Please note that upon accessing these links, you should follow the instructions provided within the repository overview shown on Docker Hub. The overview contains detailed guidance on deploying the application versions.
-
-This will allow you to quickly set up the different versions of the application without the need to build the images locally.
 
 --- 
 ## How to cite
