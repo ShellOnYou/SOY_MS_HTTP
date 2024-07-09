@@ -19,6 +19,8 @@ This directory contains the code of the microservice version. It includes the fo
 
 - `gateway`: Code for the *gateway* service.
 
+- `soy-db`: *database* of the app.
+
 
 ## Building or getting the app
 
@@ -39,8 +41,11 @@ In case of problem also refer to the following link [Docker Hub images](https://
 
 
 ## Setting up the app
+- Go with the `cd` to the `soy-db` folder.
 
 - Uncompress the content of the DB by typing: `tar xzf v5-soy-dv.tgz`. This should create a `v5-soy-db` folder. Check by `ls -l` that the permissions are `7xx` on this folder (i.e. the user has all permissions).
+
+- Type `cd ..` to return to the root folder
 
 - Modify the `variables.env` file according to your environment requirements.
 
@@ -61,7 +66,7 @@ Note: with older versions of *docker*, e.g. v20, you could need to add a dash: `
 
 ## Accessing the app
 
-Once it is launched, you can access the app using the appropriate endpoints and ports specified in your customized `docker-compose.yml` and `variables.env` files. If you didn't change any port version, the front is accessed at `http://localhost:3001` and the backend at `http://localhost:5001`.
+Once it is launched, you should wait several minutes before the frontend is ready to accept connections. You can access the app using the appropriate endpoints and ports specified in your customized `docker-compose.yml` and `variables.env` files. If you didn't change any port version, the front is accessed at `http://localhost:3001` and the backend at `http://localhost:5001`.
 The endpoints are listed in the `exercise-http/routes` and the `other-http/routes` folders.
 
 The DB in its current state contains a large number of user accounts for load test purposes. We give some examples here so that you can log in with the front of the app to explore its functionalities:
