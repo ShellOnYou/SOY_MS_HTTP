@@ -64,6 +64,10 @@ Note: with older versions of *docker*, e.g. v20, you could need to add a dash: `
 Once it is launched, you can access the app using the appropriate endpoints and ports specified in your customized `docker-compose.yml` and `variables.env` files. If you didn't change any port version, the front is accessed at `http://localhost:3001` and the backend at `http://localhost:5001`.
 The endpoints are listed in the `exercise-http/routes` and the `other-http/routes` folders.
 
+The DB in its current state contains a large number of user accounts for load test purposes. We give some examples here so that you can log in with the front of the app to explore its functionalities:
+- adminp@yopmail.com / anonymous
+- teacher@yopmail.com / plageVB
+- etud-ig3-0@yopmail.com / plageCT
 
 ## Replicating some services
 
@@ -88,8 +92,6 @@ Note: the *gateway* service cannot be replicated in the same way. You need to be
 - Ensure that the `variables.env` file is properly configured with necessary environment variables before deploying the app.
 
 - Make sure Docker and Docker Compose are properly installed and configured on your system before proceeding with deployment. This version was run and load tested under Docker version 20.10.23
-
-
 
 --- 
 ## How to cite
