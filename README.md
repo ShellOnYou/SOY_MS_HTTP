@@ -90,30 +90,6 @@ Note: the *gateway* service cannot be replicated in the same way. You need to be
 - Make sure Docker and Docker Compose are properly installed and configured on your system before proceeding with deployment. This version was run and load tested under Docker version 20.10.23
 
 
-### MonolithVersion
-
-The monolithic version of the app can be found inside the `MonolithVersion` directory, which contains two subdirectories:
-
-- `back`: Contains the code for the bakend of the monolithic version of the app.
-
-- `docker_init`: Contains Docker configuration files for deploying the monolithic application.
-
-##### Docker Configuration (`docker_init/docker-compose.yml`)
-
-The `docker-compose.yml` file in the `docker_init` directory orchestrates the deployment of the monolithic application. 
-
-### Load_Tests_Ms_Version
-
-A load test project specifically designed to launch and analyze Gatling load tests *for the microservice version* of the application.
-
-Inside the `Load_Tests_Ms_Version` directory, you'll find the following structure:
-
-- `gatling`: scripts and configuration files to add to Galting for load testing this app.
-  - `README.md`: an explanation of the different steps to follow to launch the tests
-  - `bin`: our scripts for setting up the app and launch Galting tests on it.
-  - `user-files`: files necessary for Gatling to generate and send requests to the app. The proposed scenario follows that described in the paper.
-
-Load testing *the monolith version* requires you to simplify our .sh scripts located in the `bin` directory.
 
 --- 
 ## How to cite
