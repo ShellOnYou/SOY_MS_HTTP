@@ -1,0 +1,79 @@
+
+services:
+
+  front:
+    image: "icws24submission/front_v5"
+    container_name: soy_front_v5
+    security_opt:
+      - no-new-privileges:true
+    restart: always
+    ports:
+      - "3001:8000"
+    env_file:
+      - variables.env
+    
+
+
+  postgres:
+    container_name: postgres
+    image: icws24submission/postgres_icws24
+    shm_size: 1g
+    security_opt:
+      - no-new-privileges:true
+    restart: always
+    env_file:
+      - variables.env
+    networks:
+      - appnet
+    volumes:
+      - ./v5-soy-db:/var/lib/postgresql/data 
+
+  gateway:
+    container_name: gateway
+    image: icws24submission/gateway_icws24
+    security_opt:
+      - no-new-privileges:true
+    restart: always
+    depends_on:
+      - ms-exercise
+      - ms-other
+    ports:
+      - "5001:8080"
+    networks:
+      - appnet
+    env_file:
+      - variables.env
+
+  ms-exercise:
+    container_name: ms-exercise
+    image: icws24submission/exercise_icws24
+    security_opt:
+      - no-new-privileges:true
+    restart: always
+    networks:
+      - appnet
+    env_file:
+      - variables.env
+    deploy:
+      replicas: 1
+
+  ms-other:
+    container_name: ms-other
+    image: icws24submission/other_icws24
+    security_opt:
+      - no-new-privileges:true
+    restart: always
+    networks:
+      - appnet
+    env_file:
+      - variables.env
+    deploy:
+      replicas: 1
+
+networks:
+  appnet:
+    external: true
+
+volumes:
+   v5-plage-db:  
+   #external: true
