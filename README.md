@@ -20,7 +20,6 @@ This repo contains the microservice version (v5) of the ShellOnYou app described
 This app proposes exercises for students to practice the Unix CLI. 
 The app is designed for instructors to deploy, edit exercises and create exercizing sessions for their students. 
 
----
 ### Key Features
 The application offers a wide range of features to facilitate the learning experience:
 
