@@ -16,27 +16,25 @@
 
 This repo contains the microservice version (v5) of the ShellOnYou app described in [1]. 
 
-## Goal
+### Goal
 This app proposes exercises for students to practice the Unix CLI. 
-The app is designed for instructors to deploy, and create exercise sessions for their students. 
+The app is designed for instructors to deploy, edit exercises and create exercizing sessions for their students. 
 
 ---
 ### Key Features
-The application offers a range of features to enhance the learning experience:
+The application offers a wide range of features to facilitate the learning experience:
 
-`Exercise on different themes`: Exercises can be made available on a range of 10 themes. 
-`Exercise library`: The exercises can be modified / extended by instructors or also serve as models for proposing new ones. A Python library eases the development process.
+`Exercise on different themes`: exercises can be made available on a range of 10 themes, each associated with specific skills. 
 
-`Associate skills to exercises`: A skill list is provided. Instructors can associate skills to each exercise and learners gain skills when they reach at least 50% score for an exercise.
+`Associate skills to exercises`: instructors can associate skills to each exercise and learners gain skills when they reach at least 50% score for an exercise.
 
-`Different Difficulty Levels`: The students can rate the difficulty of each proposed exercise, giving feedback to instructors. 
+`Exercise library`: exercises can be modified / extended by instructors or also serve as models for new ones. A Python library eases the development process.
 
-`Instant Evaluations`: Learners receive immediate feedback when posting an answer archive with comments to understand where they succeeded and where they can improve.
+`Difficulty Levels`: learners can rate the difficulty of each exercise, giving feedback to instructors and other learners. 
+
+`Instant Evaluations`: learners receive immediate feedback when posting an answer. Feedback consists in a 0-100 score together with comments on each question, to know whether and where they can improve or hints to solve the exercise in a different way.
 
 `Thanking other users`: An icon allows learners to thank others, encouraging peer learning. 
-
-Note that the database proposed here contains just one exercise. Instructors can contact us to have access to a private repo containing more exercises (not exposed to students ;-).
-
 
 ## Content of the repo
 
@@ -124,11 +122,13 @@ The DB in its current state contains a large number of user accounts for load te
 ### Exercises
 Instructors can add exercises, group them into sessions that can be opened to their students.  See the *Help* pages once the app has been started.
 
-In this version of the app (v5), a student solves an exercise by getting then uploading a .tar.gz archive: 
+*Note that the database proposed here contains just one exercise. Instructors can contact us to have access to a private repo containing more exercises (not exposed to learners :wink:)*
 
-The student receives an exercise archive to explore and modify on a unix system together with instructions in the app. 
-Once the student has made up an answer, packed it inside an answer archive, and submitted it to the app, it will be automatically analyzed (no IA behind the hood, but just plain old python script that checks the student’s answer point by point). The student then receives almost instant feedback and score. 
-Each instructor has access to statistics on the students that subscribed to his/her exercise sessions. This feature allows the instructor to estimate their understanding, have feedback on the exercise’s difficulty and provide prompt assistance if needed.
+In this version of the app (v5), a learner solves an exercise by getting then uploading a .tar.gz archive: 
+
+The learner receives an exercise archive to explore and modify on a unix system together with instructions in the app. 
+Once the learner has made up an answer, packed it inside an answer archive, and submitted it to the app, it will be automatically analyzed (no IA behind the hood, but just plain old python script that checks the learner’s answer point by point). The learner then receives almost instant feedback and score. 
+Each instructor has access to statistics on the learners that subscribed to his/her exercise sessions. This feature allows the instructor to estimate their understanding, have feedback on the exercise’s difficulty and provide prompt assistance if needed.
 
 --- 
 ## How to cite
