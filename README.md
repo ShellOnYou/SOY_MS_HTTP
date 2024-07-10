@@ -81,9 +81,7 @@ The app comes in a configuration where each service is launched just once, but y
 `docker compose --compatibility up`
 
 Note: when you do changes in the `docker-compose.yml` file you should stop the app before re-launching it:
-    ```bash
-    docker-compose down
-    ```
+    `docker-compose down`
 
 Note: the *gateway* service cannot be replicated in the same way. You need to be put behind a reverse proxy in order to replicate it (the entrance port can only be mapped to one process). In [1] we resorted to an [HAproxy](https://www.haproxy.org/) service to do that. It's installation is beyond the scope of this README file but you can contact us in case of difficulties. 
 
