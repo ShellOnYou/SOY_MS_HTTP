@@ -149,7 +149,7 @@ All contributions are welcome! If you would like to contribute to this project, 
 
 
 ## License
-## Copyright notice
+### Copyright notice
 ``````
 Shell On You, an educational web application to learn shell.
 Copyright © 2022 POLYTECH MONTPELLIER.
@@ -166,7 +166,7 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 ``````
-## Modification
+### Modification
 When you modified the code of a file, you may edit the copyright notice on top of it and make it a modification notice by adding a modification copyright notice.
 ``````
 Shell On You, an educational web application to learn shell.
