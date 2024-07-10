@@ -2,25 +2,23 @@
 
 ## Introduction
 
-This repo contains the microservice version 5 of the ShellOnYou app described in [1]. This app proposes exercises for students to practice the Unix CLI. Teachers can add exercises group them into sessions that can be opened to their students. 
+This repo contains the microservice version (v5) of the ShellOnYou app described in [1]. This app proposes exercises for students to practice the Unix CLI. Teachers can add exercises group them into sessions that can be opened to their students. 
 See the *Help* pages once the app has been started.
 
 Note that the database proposed here contains just one exercise. Instructors can contact us to have access to a private repo containing more exercises (not exposed to students ;-).
 
-The app is intended to run as a set of docker containers orchestrated by *docker Swarm*, so you need docker installed (v25 and v26 have been tested but older version should also work). Alternatively, you could easily migrate to kubernetes or even manually start its component one by one with appropriate changes in the code (port numbers, variables).
+The app is intended to run as a set of docker containers orchestrated by *docker compose*, so you need docker installed (v25 and v26 have been tested but older version should also work). Alternatively, you could easily migrate to kubernetes or even manually start the app components one by one with appropriate changes in the code (port numbers, variables).
+
+In this version, services communicate by `http` requests sent to the API gateway.
 
 ## Content
 
-This directory contains the code of the microservice version. It includes the following components:
+This repo is orgniazed in several folders:
 
 - `exercise-http`: Code for the *exercise* microservice.
-
 - `other-http`: Code for the *other* (aka *leftover*) microservice.
-
 - `gateway`: Code for the *gateway* service.
-
 - `soy-db`: *database* of the app.
-
 
 ## Building or getting the app
 
@@ -38,7 +36,6 @@ Alternatively, you can get the app by getting the docker images from Docker Hub:
 - run the `pull_from_dockerHub.sh` script  
 
 In case of problem also refer to the following link [Docker Hub images](https://hub.docker.com/repository/docker/icws24submission/postgres_icws24/general)
-
 
 ## Setting up the app
 - Go with the `cd` to the `soy-db` folder.
