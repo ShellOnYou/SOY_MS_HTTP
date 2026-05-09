@@ -36,7 +36,7 @@ module.exports.create = async function (req, res) {
     state: req.body.exercise.state,
     author: req.session.user_id,
     name: req.body.exercise.name,
-    locale: req.i18n.getLocale(),
+    locale: req.body.exercise.locale,
     ref_id: !req.body.exercise.ref_id || req.body.exercise.ref_id < 0 ? undefined : req.body.exercise.ref_id
   };
 
@@ -153,7 +153,7 @@ module.exports.update = async function (req, res) {
         state: req.body.exercise.state,
         author: req.body.exercise.author,
         name: req.body.exercise.name,
-        locale: req.i18n.getLocale(),
+        locale: req.body.exercise.locale,
         ref_id: req.body.exercise.ref_id
       };
       if (data.ref_id === -1) {
